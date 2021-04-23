@@ -82,7 +82,8 @@ include 'config.php';
             display: block;
         }
 
-        
+        .hidetext { -webkit-text-security: disc; /* Default */ }
+
     </style>
 
 </head>
