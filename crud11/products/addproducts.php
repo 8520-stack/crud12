@@ -4,11 +4,7 @@ include '../shared/config.php';
 include '../shared/nav.php';
 include '../adminAuthentication.php';
 include '../shared/function.php';
-$prodName='';
-$price='';
-$description='';
-$image='';
-$status='';
+$prodName=$price=$description=$image=$status='';
 $update= false;
 if(isset($_GET['update'])){
 	$update= true;
@@ -32,7 +28,6 @@ if (isset($_POST['send'])) {
 	$status = $_POST['status'];
 	$price = $_POST['price'];
 	$section_id = $_POST['section_id'];
-
 	$image = $_FILES['image'];
 	$imagename = $_FILES['image']['name'];
 	$imagetype = $_FILES['image']['type'];
@@ -46,11 +41,11 @@ if (isset($_POST['send'])) {
 	}*/
 
 
-	$insert = "INSERT INTO `products` VALUES ( NULL ,'$prodName','$description','$imagename','$status',$section_id , $price)";
+	$insert = "INSERT INTO `products` VALUES (NULL,'$prodName','$description','$imagename','$status','$section_id', '$price','')";
 	$i = mysqli_query($conn, $insert);
 	//testmeseage($i,"insert");
 
-	header("location: ../products/listproducts.php");
+	// header("location: ../products/listproducts.php");
 }
 
 
@@ -61,10 +56,7 @@ if (isset($_POST['send'])) {
         $status = $_POST['status'];
         $price= $_POST['price'];
 		$description=$_POST['description'];
-		
-		
-    
-        $update = "UPDATE  products set prodName='$prodName', status='$status' , price=$price, description='$description' WHERE prodId=$id ";
+        $update = "UPDATE  `products` SET prodName='$prodName', status='$status' , price=$price, description='$description' WHERE prodId=$id ";
        $i= mysqli_query($conn, $update);
 	   
 	  // testmeseage($i,"update");
@@ -286,7 +278,7 @@ if (isset($_POST['send'])) {
 
 				<label>Product decription <input type="text" name="description"  value="<?php echo $description?>"></label>
 				<label>Product status <input type="text" name="status" value="<?php echo $status?>"> </label>
-				<label>Product price <input type="text" name="price" value="<?php echo $price?>" ></label>
+				<label>Product price <input type="number" name="price" value="<?php echo $price?>" ></label>
 				
 				
 
